@@ -1,0 +1,4 @@
+(executable
+ (public_name md_to_html)
+ (name main)
+ (libraries md_to_html))
