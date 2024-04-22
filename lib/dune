@@ -1,2 +1,3 @@
 (library
+ (libraries base stdio)
  (name md_to_html))
