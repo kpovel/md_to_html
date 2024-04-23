@@ -31,6 +31,7 @@ let () =
         Stdlib.exit 1
   in
 
-  let _stream = Tokenizer.input_to_stream file in
-  (* List.iter ~f:(fun x -> Stdlib.Format.printf "%s, " x) stream*)
-  ()
+  let stream = Tokenizer.input_to_stream file in
+  let html = Stream_to_output.stream_to_html stream in
+
+  Stdlib.Format.printf "%s\n" html
