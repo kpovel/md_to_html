@@ -11,6 +11,7 @@ type token =
   | Quote of string
   | NumberedList of int * string
   | UnorderedList of string
+  | Br
   | Separator
 
 type task = SolvedTask of string | UnsolvedTask of string
@@ -41,6 +42,7 @@ let input_to_stream input =
       | ">" :: l -> Quote (String.concat ~sep:" " l)
       | "-" :: l -> UnorderedList (String.concat ~sep:" " l)
       | "---" :: [] -> Separator
+      | "" :: [] -> Br
       | prefix :: rest as all -> (
           let last_char =
             String.sub prefix ~pos:(String.length prefix - 1) ~len:1
