@@ -6,11 +6,11 @@ open Md_to_html
 (* 3. parse a file *)
 (* 4. write output to a file *)
 
-type pathes = { input_path : string; _output_path : string }
+type pathes = { input_path : string; output_path : string }
 
 let get_pathes args =
   if Array.length args < 3 then Error "Not enough arguments"
-  else Ok { input_path = Array.get args 1; _output_path = Array.get args 2 }
+  else Ok { input_path = Array.get args 1; output_path = Array.get args 2 }
 
 let () =
   let args = Sys.get_argv () in
@@ -34,4 +34,4 @@ let () =
   let stream = Tokenizer.input_to_stream file in
   let html = Stream_to_output.stream_to_html stream in
 
-  Stdlib.Format.printf "%s\n" html
+  Write_output.write_output ~path:pathes.output_path ~html
