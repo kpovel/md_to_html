@@ -13,8 +13,20 @@ let stream_to_html stream =
         | H6 str -> Stdlib.Format.sprintf "<h6>%s</h6>" str
         | P str -> Stdlib.Format.sprintf "<p>%s</p>" str
         | Quote str -> Stdlib.Format.sprintf "<blockquote>%s</blockquote>" str
-        | NumberedList (_pos, str) -> Stdlib.Format.sprintf "<li>%s</li>" str
-        | UnorderedList str -> Stdlib.Format.sprintf "<li>%s</li>" str
+        | NumberedList list ->
+            let items =
+              String.concat
+                (List.map list ~f:(fun x ->
+                     Stdlib.Format.sprintf "<li>%s</li>" x))
+            in
+            Stdlib.Format.sprintf "<ol>%s</ol>" items
+        | UnorderedList list ->
+            let items =
+              String.concat
+                (List.map list ~f:(fun x ->
+                     Stdlib.Format.sprintf "<li>%s</li>" x))
+            in
+            Stdlib.Format.sprintf "<ul>%s</ul>" items
         | Br -> "<br />"
         | Separator -> "<hr />")
   in
